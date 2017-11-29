@@ -1,4 +1,4 @@
-package chapter12;
+package chapter12.SimpleGUI;
 
 import java.awt.*;
 import javax.swing.*;

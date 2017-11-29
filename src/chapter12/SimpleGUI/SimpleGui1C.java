@@ -1,17 +1,18 @@
-package chapter12;
+package chapter12.SimpleGUI;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class SimpleGui1D {
+public class SimpleGui1C {
+
     public static void main(String[] args) {
-        SimpleGui1D gui = new SimpleGui1D();
+        SimpleGui1C gui = new SimpleGui1C();
         gui.go();
     }
-    private void go(){
-        JFrame frame = new JFrame();
-        MyDrawPanel2 m = new MyDrawPanel2();
-        frame.getContentPane().add(m);
 
+    private void go() {
+        JFrame frame = new JFrame();
+        MyDrawPanel m = new MyDrawPanel();
+        frame.getContentPane().add(m);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 300);
         frame.setVisible(true);

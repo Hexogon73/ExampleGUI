@@ -1,4 +1,4 @@
-package chapter12;
+package chapter12.SimpleGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 public class MyDrawPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
-        Image image = new ImageIcon("C:\\Users\\Сергей\\IdeaProjects\\ExampleGUI\\src\\chapter12\\cat.jpeg").getImage();
+        Image image = new ImageIcon("C:\\Users\\Сергей\\IdeaProjects\\ExampleGUI\\src\\chapter12\\SimpleGUI\\cat.jpeg").getImage();
         g.drawImage(image, 10,10, this);
         g.setColor(Color.red);
         g.fillRect(50, 50, 100, 100);

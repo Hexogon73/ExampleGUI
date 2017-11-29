@@ -1,4 +1,4 @@
-package chapter12;
+package chapter12.SimpleGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ class BackgroundImageJFrame extends JFrame
         setVisible(true);
 
         setLayout(new BorderLayout());
-        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Сергей\\IdeaProjects\\ExampleGUI\\src\\cat.jpeg")));
+        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Сергей\\IdeaProjects\\ExampleGUI\\src\\chapter12\\SimpleGUI\\cat.jpeg")));
         setLayout(new FlowLayout());
         l1=new JLabel("Here is a button");
         b1=new JButton("I am a button");

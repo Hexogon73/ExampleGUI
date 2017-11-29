@@ -1,4 +1,4 @@
-package chapter12;
+package chapter12.SimpleGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class SimpleAnimation {
             try {
                 Thread.sleep(50);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
