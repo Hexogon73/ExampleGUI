@@ -22,6 +22,7 @@ public class MiniMusicPlayer3 {
         f.setContentPane(ml);
         f.setBounds(30, 30, 500, 500);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void go() {
@@ -34,7 +35,7 @@ public class MiniMusicPlayer3 {
             Sequence seq = new Sequence(Sequence.PPQ, 4); //создаем последовательность
             Track track = seq.createTrack(); //запрашиваем трек у последовательности
 
-            int r = 0;
+            int r;
             for (int i = 0; i < 60; i += 4) {
                 r = (int) ((Math.random() * 50) + 1);
                 track.add(makeEvent(144, 1, r, 100, i));
@@ -57,6 +58,7 @@ public class MiniMusicPlayer3 {
             a.setMessage(comd, chan, one, two);
             event = new MidiEvent(a, tick);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return event;
     }
