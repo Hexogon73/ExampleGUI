@@ -58,6 +58,7 @@ public class MyJCheckBox {
                 i++;
             }
             textField.setText("Check box is checked!" + i);
+            MyJTextArea checkBox = new MyJTextArea();
         }
     }
 }
