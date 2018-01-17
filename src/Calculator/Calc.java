@@ -2,92 +2,171 @@ package Calculator;
 
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Calc {
     public static void main(String[] args) {
         Calc gui = new Calc();
     }
 
-    JTextField textField;
+    private JTextField firstNumber;
+    private JTextField secondNumber;
+    private JTextField resultNumber;
+    private JLabel label4;
 
     public Calc() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setBackground(Color.yellow);
+        panel.setBackground(Color.decode("#cfddce"));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         JPanel panel1 = new JPanel();
-        panel1.setBackground(Color.darkGray);
-
+        panel1.setBorder(new EmptyBorder(10, 10, 10, 10));
         JPanel panel2 = new JPanel();
+        panel2.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel2.setBackground(Color.green);
-
         JPanel panel3 = new JPanel();
-        panel3.setBackground(Color.orange);
 
-        JPanel panel4 = new JPanel();
-        panel4.setBackground(Color.GRAY);
+        firstNumber = new JTextField("0", 8);
+        secondNumber = new JTextField("0", 8);
+        resultNumber = new JTextField(8);
+        JLabel label1 = new JLabel("Первое число");
+        JLabel label2 = new JLabel("Второе число");
+        JLabel label3 = new JLabel("Результат");
+        label4 = new JLabel("");
 
-        textField = new JTextField(20);
-        textField.addActionListener(new TextFieldListener());
+        panel1.setLayout(new GridLayout(3, 1, 10, 10));
+        panel1.add(label1);
+        panel1.add(firstNumber);
+        panel1.add(label2);
+        panel1.add(secondNumber);
+        panel1.add(label3);
+        panel1.add(resultNumber);
 
-        ArrayList<JButton> jButtons = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            jButtons.add(new JButton(Integer.toString(i)));
+        panel2.setLayout(new GridLayout(2, 3, 10, 10));
+        panel3.setLayout(new GridLayout(2, 3, 10, 10));
+        panel3.add(label4);
+
+
+        JButton bSum = new JButton("+");
+        bSum.addActionListener(new SumListener());
+        JButton bSubstract = new JButton("-");
+        bSubstract.addActionListener(new SubListener());
+        JButton bMultiple = new JButton("*");
+        bMultiple.addActionListener(new MultipleListener());
+        JButton bDivide = new JButton("/");
+        bDivide.addActionListener(new DivideListener());
+        JButton bSQRT = new JButton("" + '\u221A');
+        bSQRT.addActionListener(new SqrtListener());
+        JButton bClean = new JButton("C");
+        bClean.addActionListener(new ClearFieldListener());
+        bClean.setBackground(Color.red);
+
+        Font BigFontTR = new Font("TimesRoman", Font.BOLD, 20);
+        JButton[] operButtons = {bClean, bSum, bSubstract, bMultiple, bDivide, bSQRT};
+        for (JButton ob : operButtons) {
+            ob.setFont(BigFontTR);
+            panel2.add(ob);
         }
-//        JButton button1 = new JButton("1");
-//        JButton button2 = new JButton("2");
-//        JButton button3 = new JButton("3");
-//
-//        JButton button4 = new JButton("4");
-//        JButton button5 = new JButton("5");
-//        JButton button6 = new JButton("6");
-//
-//        JButton button7 = new JButton("7");
-//        JButton button8 = new JButton("8");
-//        JButton button9 = new JButton("9");
-        panel1.add(textField);
 
-        int i = 0;
-        for (JButton jb : jButtons) {
-            if (i < 3) { panel2.add(jButtons.get(i)); }
-            if (i >= 3 & i < 6) { panel3.add(jButtons.get(i)); }
-            if (i >= 6 & i < 9) { panel4.add(jButtons.get(i)); }
-            i++;
-        }
-//        panel2.add(button1);
-//        panel2.add(button2);
-//        panel2.add(button3);
-//        panel3.add(button4);
-//        panel3.add(button5);
-//        panel3.add(button6);
-//        panel4.add(button7);
-//        panel4.add(button8);
-//        panel4.add(button9);
-//        panel.add(panel1);
+        panel.add(panel1);
         panel.add(panel2);
         panel.add(panel3);
-        panel.add(panel4);
 
         frame.getContentPane().add(BorderLayout.CENTER, panel);
-        frame.getContentPane().add(BorderLayout.NORTH, panel1);
-
-        frame.setSize(250, 250);
+        frame.setSize(300, 350);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    class TextFieldListener implements ActionListener {
-        int i;
+    class ClearFieldListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            i++;
-            textField.setText("Text changed! " + i);
+            firstNumber.setText("");
+            secondNumber.setText("");
+            resultNumber.setText("");
+        }
+    }
+
+    class SumListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double a = Double.parseDouble(firstNumber.getText());
+                double b = Double.parseDouble(secondNumber.getText());
+                double s = a + b;
+                resultNumber.setText(String.format("%.2f", s));
+            } catch (NumberFormatException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Неверный формат числа или пустое поле");
+            }
+        }
+    }
+
+    class SubListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double a = Double.parseDouble(firstNumber.getText());
+                double b = Double.parseDouble(secondNumber.getText());
+                double s = a - b;
+                resultNumber.setText(String.format("%.2f", s));
+            } catch (NumberFormatException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Неверный формат числа или пустое поле");
+            }
+        }
+    }
+
+    class MultipleListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double a = Double.parseDouble(firstNumber.getText());
+                double b = Double.parseDouble(secondNumber.getText());
+                double s = a * b;
+                resultNumber.setText(String.format("%.2f", s));
+            } catch (NumberFormatException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Неверный формат числа или пустое поле");
+            }
+        }
+    }
+
+    class DivideListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double a = Double.parseDouble(firstNumber.getText());
+                double b = Double.parseDouble(secondNumber.getText());
+                double s = a / b;
+                resultNumber.setText(String.format("%.2f", s));
+            } catch (ArithmeticException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Деление на ноль");
+            } catch (NumberFormatException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Неверный формат числа или пустое поле");
+            }
+        }
+    }
+
+    class SqrtListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double a = Double.parseDouble(firstNumber.getText());
+                secondNumber.setText("");
+                resultNumber.setText(String.format("%.2f", Math.sqrt(a)));
+            } catch (NumberFormatException e1) {
+                resultNumber.setText("Err");
+                label4.setText("Err: Неверный формат числа или пустое поле");
+            }
         }
     }
 }
